@@ -1,0 +1,8 @@
+*~
+/.*
+.*
+!.gitignore
+!.editorconfig
+*.swp
+*.swo
+.vscode
