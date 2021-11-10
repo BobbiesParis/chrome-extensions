@@ -1,0 +1,45 @@
+#barcode {
+    display: block;
+    width: 80%;
+    min-width: 150px;
+    margin-bottom: 7px;
+    /* height: calc(1.5em + 0.75rem + 2px); */
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    /* line-height: 1.5; */
+    color: #495057;
+    background-color: #ffffff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+#barcode:focus {
+    border-color: #5a4f7f;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem #71639e66;
+}
+#barcode::placeholder {
+    color: #ababab;
+    font-style: italic;
+}
+#submit {
+    border: 0;
+    background: none;
+    background-color: #71639e;
+    border-color: #5a4f7f;
+    border-radius: 0.25rem;
+    box-shadow: none;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 0.375rem 0.75rem;
+    width: 100%;
+}
+#submit:hover {
+    background-color: #605487;
+    border-color: #5a4f7f;
+}
