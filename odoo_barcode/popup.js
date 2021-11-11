@@ -17,17 +17,21 @@ submitButton.addEventListener("click", async () => {
 // The body of this function will be executed as a content script inside the
 // current page
 function simulateBarcodeScan(barcode) {
-    console.log('barcode=' + barcode)
     function triggerKeypressEvent(char) {
-        var keycode;
+        let keycode;
         if (char === "Enter") {
             keycode = 13;
         } else {
             keycode = char.charCodeAt(0);
         }
         return document.body.dispatchEvent(
-            new KeyboardEvent('keypress', { keyCode: keycode })
+            new KeyboardEvent('keypress', { keyCode: keycode, which:keycode })
         );
     }
-    barcode.split('').concat('Enter').map(triggerKeypressEvent);
+    for (const code of barcode.split(/\r?\n/g)) {
+        var send = (code) => {
+            code.split('').concat('Enter').map(triggerKeypressEvent);
+        }
+        setTimeout(send, code.startsWith('O-CMD.') ? 800: 0, code);
+    }
 }
