@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <form style="max-width: 50%; margin-left: 25%;">
+            <h1>Odoo Barcode</h1>
+            <h2>Pop-up behaviors</h2>
+            <p>
+                <input type="checkbox" id="close_window" name="close_window"/>
+                <label for="close_window">
+                    <span class="ui"></span>
+                    close window after barcode sending
+                </label>
+            </p>
+            <h2>Timeout</h2>
+            <p>
+                <input type="text" id="default_timeout" name="default_timeout"/>
+                <label for="default_timeout">ms between two barcodes</label>
+            </p>
+            <p>
+                <input type="text" id="command_timeout" name="command_timeout"/>
+                <label for="command_timeout">ms before a command</label>
+                <span>, ie barcode starting with "O-CMD."</span>
+            </p>
+            <input id="submit" type="submit" value="Save"/>
+        </form>
+    </body>
+    <script src="options.js"></script>
+</html>

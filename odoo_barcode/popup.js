@@ -1,7 +1,7 @@
 // Initialize submit
 let submitButton = document.getElementById("submit");
 
-// When the button is clicked, inject setFormInput into current page
+// When the button is clicked, inject simulateBarcodeScan into current page
 submitButton.addEventListener("click", async () => {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     let barcode = document.getElementById("barcode").value;
@@ -11,13 +11,17 @@ submitButton.addEventListener("click", async () => {
         function: simulateBarcodeScan,
         args: [barcode],
     });
-    window.close();
+    chrome.storage.sync.get("options", (data) => {
+        if (data.options.close_window) {
+            window.close();
+        }
+    });
 });
 
 // The body of this function will be executed as a content script inside the
 // current page
 function simulateBarcodeScan(barcode) {
-    function triggerKeypressEvent(char) {
+    let triggerKeypressEvent = (char) => {
         let keycode;
         if (char === "Enter") {
             keycode = 13;
@@ -27,11 +31,14 @@ function simulateBarcodeScan(barcode) {
         return document.body.dispatchEvent(
             new KeyboardEvent('keypress', { keyCode: keycode, which:keycode })
         );
-    }
+    };
     for (const code of barcode.split(/\r?\n/g)) {
-        var send = (code) => {
-            code.split('').concat('Enter').map(triggerKeypressEvent);
+        let send = (cstring) => {
+            cstring.split('').concat('Enter').map(triggerKeypressEvent);
         }
-        setTimeout(send, code.startsWith('O-CMD.') ? 800: 0, code);
+        chrome.storage.sync.get('options', (data) => {
+            const attr = code.startsWith('O-CMD.') ? 'command' : 'default'
+            setTimeout(send, data.options[attr + '_timeout'], code);
+        });
     }
 }

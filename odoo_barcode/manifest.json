@@ -3,9 +3,13 @@
     "description": "Simulate barcode scanning!",
     "version": "0.1",
     "manifest_version": 3,
+    "background": {
+        "service_worker": "background.js"
+    },
     "permissions": [
         "activeTab",
-        "scripting"
+        "scripting",
+        "storage"
     ],
     "action": {
         "default_popup": "popup.html",
@@ -15,5 +19,6 @@
     },
     "icons": {
         "128": "/images/icon.png"
-    }
+    },
+    "options_page": "options.html"
 }
