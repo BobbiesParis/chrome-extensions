@@ -37,7 +37,8 @@ function simulateBarcodeScan(barcode) {
             cstring.split('').concat('Enter').map(triggerKeypressEvent);
         }
         chrome.storage.sync.get('options', (data) => {
-            const attr = code.startsWith('O-CMD.') ? 'command' : 'default'
+            const attr = code.startsWith('O-CMD.') || code.startsWith('O-BTN.')
+                ? 'command' : 'default'
             setTimeout(send, data.options[attr + '_timeout'], code);
         });
     }
