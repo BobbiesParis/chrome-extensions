@@ -1,8 +1,6 @@
 Chrome extensions by Bobbies
 ============================
 
-This repository contains a collection of Chrome extensions.
+This repository contains a collection of Chrome extensions:
 
-Odoo Barcode
-------------
-
+* Odoo Barcode
