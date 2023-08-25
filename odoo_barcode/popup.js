@@ -32,9 +32,17 @@ function simulateBarcodeScan(barcode) {
             new KeyboardEvent('keypress', { keyCode: keycode, which:keycode })
         );
     };
+    let triggerKeydownEvent = (char) => {
+        return document.body.dispatchEvent(
+            new KeyboardEvent("keydown", { key: char })
+        );
+    };
     for (const code of barcode.split(/\r?\n/g)) {
         let send = (cstring) => {
+            // Odoo < 16.0
             cstring.split('').concat('Enter').map(triggerKeypressEvent);
+            // Odoo >= 16.0
+            cstring.split('').concat('Enter').map(triggerKeydownEvent);
         }
         chrome.storage.sync.get('options', (data) => {
             const attr = code.startsWith('O-CMD.') || code.startsWith('O-BTN.')
